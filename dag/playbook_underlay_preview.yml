@@ -28,10 +28,12 @@
           - name: Render template files output
             set_fact:
               rendered: "{{ underlay_block | regex_replace('#jinja2: lstrip_blocks: \"True\", trim_blocks: \"True\"', '') | regex_replace('\\n(\\s+)','\n') | regex_replace('! ','\n! ') }}"
+          - name: Create 'preview_files' folder
+            file: path=/tmp/preview_files state=directory mode=0755
 
           - name: Copy configurations to the respective file ( <hostname>-underlay.txt ) under 'preview_files' folder
             copy:
-              dest: /root/preview_files/{{inventory_hostname}}-underlay.txt
+              dest: /tmp/preview_files/{{inventory_hostname}}-underlay.txt
               content: "{{ rendered }}"
 
 - name: Display output file info
