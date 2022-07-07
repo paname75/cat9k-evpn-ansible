@@ -31,7 +31,7 @@
 
           - name: Copy configurations to the respective file ( <hostname>-underlay.txt ) under 'preview_files' folder
             copy:
-              dest: preview_files/{{inventory_hostname}}-underlay.txt
+              dest: /root/preview_files/{{inventory_hostname}}-underlay.txt
               content: "{{ rendered }}"
 
 - name: Display output file info
